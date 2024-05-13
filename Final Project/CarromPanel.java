@@ -16,7 +16,7 @@ public class CarromPanel extends JPanel
    public static final int FRAME = 500;
    private Clip clip; // Define the clip variable
     private boolean isPlaying;
-   private BufferedImage img = new BufferedImage(1600, 1200, BufferedImage.TYPE_INT_RGB);
+   private BufferedImage img = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
 
    private Graphics buf;
    private int w = img.getWidth();
@@ -30,13 +30,13 @@ public class CarromPanel extends JPanel
    {
       //myBuffer.setBackground(Color.BLACK); 
 
-      JPanel east = new JPanel();
-      east.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 230)); // Set layout to center alignment both horizontally and vertically
-      add(east, BorderLayout.CENTER);
+      // JPanel east = new JPanel();
+//       east.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 230)); // Set layout to center alignment both horizontally and vertically
+//       add(east, BorderLayout.CENTER);
 
-      JPanel west = new JPanel();
-      east.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 230)); // Set layout to center alignment both horizontally and vertically
-      add(west, BorderLayout.CENTER);
+      // JPanel west = new JPanel();
+//       east.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 230)); // Set layout to center alignment both horizontally and vertically
+//       add(west, BorderLayout.CENTER);
 
       /**JButton singlePlayer = new JButton("Single Player");
       singlePlayer.setHorizontalAlignment(SwingConstants.CENTER);

@@ -6,7 +6,7 @@ public class DisplayCarrom extends JPanel
 {
     private ImageIcon i = new ImageIcon("carrom.jpg");
 
-    private BufferedImage img= new BufferedImage(1600,1200,BufferedImage.TYPE_INT_RGB);
+    private BufferedImage img= new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
 
     private Graphics buf = img.getGraphics();
 
