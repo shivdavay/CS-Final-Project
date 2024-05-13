@@ -11,28 +11,23 @@ import java.awt.event.ActionListener;
 public class CarromPanel extends JPanel
 {
    //fields
-   private ImageIcon i = new ImageIcon("carrom.jpg");
+   private ImageIcon i = new ImageIcon("blurred_carrom.jpg");
    private CarromPanel carromPanel;
    public static final int FRAME = 500;
    private Clip clip; // Define the clip variable
     private boolean isPlaying;
-   private BufferedImage img;
+   private BufferedImage img = new BufferedImage(1600, 1200, BufferedImage.TYPE_INT_RGB);
 
    private Graphics buf;
+   private int w = img.getWidth();
+   private int h = img.getHeight();
    //private Graphics myBuffer;  
-    public void paintComponent(Graphics g)
-  {
-    buf.drawImage( img , 0 , 0 , 500 , 500 , null );
-  }  
+    
 
    
    //constructors
    public CarromPanel()
    {
-      img = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
-        buf = img.getGraphics();
-        buf.setColor(Color.RED);
-        buf.fillRect(0,0,500,500);
       //myBuffer.setBackground(Color.BLACK); 
 
       JPanel east = new JPanel();
@@ -110,7 +105,7 @@ public class CarromPanel extends JPanel
   
   private void playSound(String filename) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Heroism.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filename));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
@@ -119,12 +114,22 @@ public class CarromPanel extends JPanel
                 if (event.getType() == LineEvent.Type.STOP) {
                     clip.close();
                     isPlaying = false;
+                    clip.stop();
+                    stopSound();
                 }
             });
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             e.printStackTrace();
         }
   }
+  
+  private void stopSound() {
+    if (clip != null && isPlaying) {
+        clip.stop();
+        clip.close();
+        isPlaying = false;
+    }
+}
   
   private class Listener_songs implements ActionListener
   {
@@ -139,6 +144,10 @@ public class CarromPanel extends JPanel
         String selectedSong = (String) comboBox.getSelectedItem();
         carromPanel.playSound(selectedSong);
     }
+  }
+  public void paintComponent(Graphics g)
+  {
+   g.drawImage(i.getImage(), 0, 0, w, h, null);
   }
 }
 
