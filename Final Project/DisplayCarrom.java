@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class DisplayCarrom extends JPanel
 {
-    private ImageIcon i = new ImageIcon("carrom.jpeg");
+    private ImageIcon i = new ImageIcon("carrom.jpg");
 
     private BufferedImage img= new BufferedImage(1600,1200,BufferedImage.TYPE_INT_RGB);
 

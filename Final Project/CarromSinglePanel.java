@@ -1,5 +1,5 @@
-//ahan banerjee
-//I will uphold acade,oc and personal intewgrity within the TJ communityu 
+//ahan banerjee and shiv davay
+//I will uphold academic and personal integrity within the TJ community 
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +22,7 @@ public class CarromSinglePanel extends JPanel
    
    private Timer t;
 
-   private ArrayList<Animatable> animationObjects;
+   //private ArrayList<Animatable> animationObjects;
    
    //But we do need a new one: this will be true when the user is holding down the left arrow key.
    //Explaining why we need this is complicated; see the assignment for details.

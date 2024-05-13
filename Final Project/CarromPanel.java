@@ -1,29 +1,38 @@
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
-//import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CarromPanel extends JPanel
 {
    //fields
    private ImageIcon i = new ImageIcon("carrom.jpg");
-   //private Image img;
-   //img = Toolkit.getDefaultToolkit().createImage("carrom.jpg");
-   //Most of this is the same as AnimationPanel
+   private CarromPanel carromPanel;
    public static final int FRAME = 500;
-   
-   private BufferedImage img= new BufferedImage(1600,1200,BufferedImage.TYPE_INT_RGB);
+   private Clip clip; // Define the clip variable
+    private boolean isPlaying;
+   private BufferedImage img;
 
-   private Graphics buf = img.getGraphics();
-   private int w = img.getWidth();
-   private int h = img.getHeight();
-  
+   private Graphics buf;
    //private Graphics myBuffer;  
+    public void paintComponent(Graphics g)
+  {
+    buf.drawImage( img , 0 , 0 , 500 , 500 , null );
+  }  
 
    
    //constructors
-   /**public CarromPanel()
+   public CarromPanel()
    {
+      img = new BufferedImage(500,500,BufferedImage.TYPE_INT_RGB);
+        buf = img.getGraphics();
+        buf.setColor(Color.RED);
+        buf.fillRect(0,0,500,500);
       //myBuffer.setBackground(Color.BLACK); 
 
       JPanel east = new JPanel();
@@ -34,7 +43,7 @@ public class CarromPanel extends JPanel
       east.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 230)); // Set layout to center alignment both horizontally and vertically
       add(west, BorderLayout.CENTER);
 
-      JButton singlePlayer = new JButton("Single Player");
+      /**JButton singlePlayer = new JButton("Single Player");
       singlePlayer.setHorizontalAlignment(SwingConstants.CENTER);
       singlePlayer.setBackground(Color.BLUE);
       singlePlayer.setOpaque(true);
@@ -52,24 +61,25 @@ public class CarromPanel extends JPanel
       west.add(multiPlayer);
    
       Listener_multiPlayer multiPlayerListener = new Listener_multiPlayer();
-      singlePlayer.addActionListener(multiPlayerListener);
+      singlePlayer.addActionListener(multiPlayerListener);*/
 
-      String[] songOptions = {"Song 1", "Song 2", "Song 3"}; // Example song options
-      JComboBox<String> songs = new JComboBox<>(songOptions);
-      songs.setBackground(Color.BLUE);
-      songs.setOpaque(true);
-      songs.setForeground(Color.BLACK);
-      east.add(songs);
+      String[] songs = {"Heroism.wav", "Warm_Inspirational_Piano.wav", "Calm_Piano.wav"};
+        JComboBox<String> songsComboBox = new JComboBox<>(songs);
+        songsComboBox.addActionListener(e -> {
+            playSound((String) songsComboBox.getSelectedItem());
+        });
+       
+      add(songsComboBox);
 
-      Listener_songs songListener = new Listener_songs();
-      songs.addActionListener(songListener);
+      Listener_songs songListener = new Listener_songs(this);
+      songsComboBox.addActionListener(songListener);
 
      
       
       repaint();
    }
 
-   private class Listener_singlePlayer implements ActionListener
+   /**private class Listener_singlePlayer implements ActionListener
    {
        public void actionPerformed(ActionEvent e)
        {
@@ -96,82 +106,43 @@ public class CarromPanel extends JPanel
          frame.pack();                                                     //Use these two lines together.
          frame.setVisible(true);
     }
-  }
-
-
-  private class Listener_songs implements ActionListener, LineListener {
-    private Clip clip;
-    private boolean playing;
-
-    public Listener_songs() {
-        playing = false;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        if (playing) {
-            stop();
-            return;
-        }
-
-        JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
-        String selectedSong = (String) comboBox.getSelectedItem();
-        String fileName = "";
-        
-        songListener.playSong("Song 1");
-
-        setTitle("Music Player");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
-        setVisible(true);
-
-
-        switch (selectedSong) {
-            case "Song 1":
-                fileName = "Heroism.wav";
-                break;
-            case "Song 2":
-                fileName = "Calm_Piano.wav";
-                break;
-            case "Song 3":
-                fileName = "Warm_Inspirational_Piano.wav";
-                break;
-        }
-
-        if (!fileName.isEmpty()) {
-            try {
-                File audioFile = new File(fileName);
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-                clip = AudioSystem.getClip();
-                clip.addLineListener(this);
-                clip.open(audioStream);
-                clip.start();
-                playing = true;
-            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    private void stop() {
-        if (clip != null && playing) {
-            clip.stop();
-            clip.close();
-            playing = false;
-        }
-    }
-
-    public void update(LineEvent event) {
-        if (event.getType() == LineEvent.Type.STOP) {
-            clip.setFramePosition(0); // Restart the clip
-            clip.start();
-        }
-    }
   }*/
-  public void paintComponent(Graphics g)
+  
+  private void playSound(String filename) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("Heroism.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            isPlaying = true;
+            clip.addLineListener(event -> {
+                if (event.getType() == LineEvent.Type.STOP) {
+                    clip.close();
+                    isPlaying = false;
+                }
+            });
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
+  }
+  
+  private class Listener_songs implements ActionListener
   {
-    buf.drawImage( i.getImage() , 0 , 0 , w , h , null );
-  }  
+    private CarromPanel carromPanel;
+
+    public Listener_songs(CarromPanel carromPanel) {
+        this.carromPanel = carromPanel;
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+       JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
+        String selectedSong = (String) comboBox.getSelectedItem();
+        carromPanel.playSound(selectedSong);
+    }
+  }
 }
+
+  
 
 
 
