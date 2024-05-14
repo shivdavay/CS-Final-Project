@@ -22,7 +22,23 @@ public class DisplayCarrom extends JPanel{
         myBuffer = myImage.getGraphics();
         myBuffer.setColor(Color.GRAY);
         myBuffer.fillRect(0,0,750,750);
-        animationObjects.add(new Striker(375,600));
+        animationObjects.add(new Striker(365,600));
+        animationObjects.add(new Red_Queen(365, 365));
+        animationObjects.add(new WhitePiece(365, 345));
+        animationObjects.add(new WhitePiece(350, 365));
+        animationObjects.add(new WhitePiece(333, 382));
+        animationObjects.add(new WhitePiece(380, 365));
+        animationObjects.add(new WhitePiece(335, 350));
+        //animationObjects.add(new WhitePiece(340, 380));
+        animationObjects.add(new WhitePiece(365, 380));
+        //animationObjects.add(new WhitePiece(340, 300));
+        //animationObjects.add(new WhitePiece(340, 320));
+        animationObjects.add(new BlackPiece(353, 382));
+        animationObjects.add(new BlackPiece(383, 382));
+        animationObjects.add(new BlackPiece(353, 353));
+        animationObjects.add(new BlackPiece(383, 353));
+        animationObjects.add(new BlackPiece(338, 368));
+        
         t = new Timer(5, new AnimationListener());
         t.start();
     }
