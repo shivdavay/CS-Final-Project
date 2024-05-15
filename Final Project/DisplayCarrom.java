@@ -29,6 +29,7 @@ public class DisplayCarrom extends JPanel{
         animationObjects.add(new WhitePiece(333, 382));
         animationObjects.add(new WhitePiece(380, 365));
         animationObjects.add(new WhitePiece(335, 350));
+        animationObjects.add(new WhitePiece(355, 332));
         //animationObjects.add(new WhitePiece(340, 380));
         animationObjects.add(new WhitePiece(365, 380));
         //animationObjects.add(new WhitePiece(340, 300));
@@ -38,6 +39,8 @@ public class DisplayCarrom extends JPanel{
         animationObjects.add(new BlackPiece(353, 353));
         animationObjects.add(new BlackPiece(383, 353));
         animationObjects.add(new BlackPiece(338, 368));
+        animationObjects.add(new BlackPiece(345, 338));
+        animationObjects.add(new BlackPiece(375, 335));
         
         t = new Timer(5, new AnimationListener());
         t.start();
