@@ -40,7 +40,9 @@ public class CarromPanel extends JPanel
             int x = e.getX();
             int y = e.getY();
             if(x>160&&x<590&&y>610&&y<630){
-
+                System.out.println("WORKING");
+            }else{
+                System.out.println(x + " " + y);
             }
         }
      }

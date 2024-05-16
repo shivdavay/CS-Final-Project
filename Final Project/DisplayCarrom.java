@@ -44,7 +44,7 @@ public class DisplayCarrom extends JPanel{
         animationObjects.add(new BlackPiece(397, 355));
         
         
-        t = new Timer(5, new AnimationListener());
+        t = new Timer(20, new AnimationListener());
         t.start();
     }
 
@@ -55,6 +55,12 @@ public class DisplayCarrom extends JPanel{
         myBuffer.drawImage(i.getImage(), 0, 0, 750, 750, null);
         for(CarromPieces animationObject : animationObjects){
            animationObject.drawMe(myBuffer);
+           animationObject.step();
+           for(CarromPieces checkCollision : animationObjects){
+                if(animationObject!=checkCollision){
+                    animationObject.collide(checkCollision);
+                }
+           }
         }        
         repaint();
      }
