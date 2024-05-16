@@ -30,7 +30,7 @@ public class DisplayCarrom extends JPanel{
         animationObjects.add(new WhitePiece(380, 365));
         animationObjects.add(new WhitePiece(335, 350));
         animationObjects.add(new WhitePiece(355, 332));
-        //animationObjects.add(new WhitePiece(340, 380));
+        animationObjects.add(new WhitePiece(395, 330));
         animationObjects.add(new WhitePiece(365, 380));
         //animationObjects.add(new WhitePiece(340, 300));
         //animationObjects.add(new WhitePiece(340, 320));
