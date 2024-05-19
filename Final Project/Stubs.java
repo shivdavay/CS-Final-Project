@@ -21,3 +21,53 @@ public class Stubs
 
 
 }
+
+/**public class BlackPiece implements CarromPieces{
+   This is going to have all the code relating to the black piece
+   constructers will tell it where it will first be drawn
+   values ddy and ddx will tell it how fast it needs to move
+   curx and cury will get the current value of x and y and
+   otx and oty with get the object it hit x and y values
+   then it calculates which way the black disc will move
+}*/
+/**public class WhitePiece implements CarromPieces{
+   This is going to have all the code relating to the white piece
+   constructers will tell it where it will first be drawn
+   values ddy and ddx will tell it how fast it needs to move
+   curx and cury will get the current value of x and y and
+   otx and oty with get the object it hit x and y values
+   then it calculates which way the white disc will move
+}*/
+/**public class Red_Queen implements CarromPieces{
+   This is going to have all the code relating to the red queen piece
+   constructers will tell it where it will first be drawn
+   values ddy and ddx will tell it how fast it needs to move
+   curx and cury will get the current value of x and y and
+   otx and oty with get the object it hit x and y values
+   then it calculates which way the red queen disc will move
+}*/
+/**public class Striker implements CarromPieces{
+   This is going to have all the code relating to the striker piece
+   constructers will tell it where it will first be drawn
+   values ddy and ddx will tell it how fast it needs to move
+   curx and cury will get the current value of x and y and
+   otx and oty with get the object it hit x and y values
+   then it calculates which way the stiker will move
+}*/
+/**public class StartingPanel extends JPanel{
+   This is the homepage where you are sent to when you first run the game
+   It has a blurred image of a carrom board in the background
+   There 3 buttons and and Jcombo box. The Jcombo box allows you to choose what song
+   and the select button will play the song. The other 2 button ask you what 
+   type of game you want to play, single player or multiplayer.
+   Once you click on these buttons it will send the player to either the 
+   multiplayer or singleplayer panel.
+}*/
+/**public class CarromPanel  extends JPanel{
+   This is the panel where you are sent to play the game 
+   It has a image of a carrom board in the background
+   In this panel there are 9 white pieces, 9 black pieces, a red queen piece,
+   and the striker present. The discs, white, black and, red are placed in a center
+   and the stiker is placed within the margin of the 2 black lines extending from the
+   2 red circles on either side.
+}*/
