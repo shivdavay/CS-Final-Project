@@ -3,26 +3,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
-public class DisplayCarrom extends JPanel{
+public class DisplayCarrom extends JPanel {
     private ImageIcon i = new ImageIcon("carrom.jpg");
-
     private BufferedImage myImage;
     private Graphics myBuffer;
     private Timer t;
     private int players;
     private ArrayList<CarromPieces> animationObjects;
 
-    public DisplayCarrom(int p){
+    public DisplayCarrom(int p) {
         animationObjects = new ArrayList<CarromPieces>();
         players = p;
         myImage = new BufferedImage(750, 750, BufferedImage.TYPE_INT_RGB);
         myBuffer = myImage.getGraphics();
         myBuffer.setColor(Color.GRAY);
-        myBuffer.fillRect(0,0,750,750);
-        animationObjects.add(new Striker(365,600));
+        myBuffer.fillRect(0, 0, 750, 750);
+        animationObjects.add(new Striker(365, 600));
         animationObjects.add(new Red_Queen(365, 365));
         animationObjects.add(new WhitePiece(365, 345));
         animationObjects.add(new WhitePiece(350, 365));
@@ -43,37 +41,31 @@ public class DisplayCarrom extends JPanel{
         animationObjects.add(new BlackPiece(375, 335));
         animationObjects.add(new BlackPiece(397, 355));
         
-        
         t = new Timer(20, new AnimationListener());
         t.start();
     }
 
-
-    public void animate(){
-
-        // Iterate through each chess piece and animate it
+    public void animate() {
         myBuffer.drawImage(i.getImage(), 0, 0, 750, 750, null);
-        for(CarromPieces animationObject : animationObjects){
-           animationObject.drawMe(myBuffer);
-           animationObject.step();
-           for(CarromPieces checkCollision : animationObjects){
-                if(animationObject!=checkCollision){
+        for (CarromPieces animationObject : animationObjects) {
+            animationObject.step();
+            for (CarromPieces checkCollision : animationObjects) {
+                if (animationObject != checkCollision) {
                     animationObject.collide(checkCollision);
                 }
-           }
-        }        
-        repaint();
-     }
-
-    public void paintComponent(Graphics g){
-        g.drawImage(myImage, 0, 0, 750, 750, null);
-     }
-
-    private class AnimationListener implements ActionListener{
-        public void actionPerformed(ActionEvent e)
-        {
-           animate();
+            }
+            animationObject.drawMe(myBuffer);
         }
-     }
-     
+        repaint();
+    }
+
+    public void paintComponent(Graphics g) {
+        g.drawImage(myImage, 0, 0, 750, 750, null);
+    }
+
+    private class AnimationListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            animate();
+        }
+    }
 }

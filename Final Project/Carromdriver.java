@@ -10,7 +10,7 @@ public class Carromdriver
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       mainFrame.setContentPane(new StartingPanel(mainFrame));
       mainFrame.getContentPane().setPreferredSize(new Dimension(750,750)); 
-      mainFrame.pack();                                                     //Use these two lines together.
+      mainFrame.pack();
       mainFrame.setVisible(true);
    }
 }
