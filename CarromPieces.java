@@ -5,10 +5,18 @@ import javax.swing.*;
 
 public interface CarromPieces {
     void drawMe(Graphics g);
-    void step();
-    void collide(CarromPieces obj);
     int getX();
     int getY();
-    void activate();
+    void setX(int x);
+    void setY(int y);
+    void setDx(double dx);
+    void setDy(double dy);
+    double getDx();
+    double getDy();
     boolean isActive();
+    void activate();
+    void collide(CarromPieces obj);
+    void step();
+    int getSize();
 }
+
