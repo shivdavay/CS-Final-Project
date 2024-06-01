@@ -8,15 +8,28 @@ public class CarromPanel extends JPanel
 {
     
     private JFrame cur;
+    private JLabel feedbackLabel;
+    private ArrayList<CarromPieces> pieces;
     public CarromPanel(JFrame f, int p)
     {
     
     cur = f;
+    pieces = new ArrayList<>(); // Initialize your pieces
     DisplayCarrom board = new DisplayCarrom(p);
     board.addMouseListener(new Mouse());
     board.setPreferredSize(new Dimension(750,750));
     add(board);
+    
+    // Adding feedback label for powder feature
+        feedbackLabel = new JLabel();
+        feedbackLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        feedbackLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        feedbackLabel.setForeground(Color.RED);
+        add(feedbackLabel, BorderLayout.SOUTH);
 
+        // Adding Powder key listener
+        Powder powder = new Powder(pieces, feedbackLabel);
+        cur.addKeyListener(powder);
 
     //buf.drawImage( i.getImage() , 0 , 0 , 750 , 750 , null );
     } 
@@ -48,3 +61,4 @@ public class CarromPanel extends JPanel
      }
     
 }
+
