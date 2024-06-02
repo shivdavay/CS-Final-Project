@@ -18,12 +18,13 @@ public class Powder extends KeyAdapter {
             for (CarromPieces piece : pieces) {
                 if (piece instanceof Striker) {
                     Striker striker = (Striker) piece;
-                    striker.setDx(striker.getDx() + 0.5);
-                    striker.setDy(striker.getDy() + 0.5);
+                    striker.setDx(striker.getDx() * 1.5);
+                    striker.setDy(striker.getDy() * 1.5);
                     feedbackLabel.setText("Powder Added, Striker Speed Increased");
+                    // Print message to console
+                    System.out.println("W key pressed: Striker speed increased");
                 }
             }
-            
         }
     }
 }

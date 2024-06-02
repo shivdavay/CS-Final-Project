@@ -12,6 +12,9 @@ public class DisplayCarrom extends JPanel {
     private int players;
     private ArrayList<CarromPieces> animationObjects;
     private Striker striker;
+    private int player1Score;
+    private int player2Score;
+    private int strikerShots;
 
     private static final int[][] VALID_RANGES = {
         {162, 610, 589, 631},
@@ -19,6 +22,12 @@ public class DisplayCarrom extends JPanel {
         {161, 123, 584, 145},
         {612, 171, 635, 587}
     };
+    
+    // Define the hole positions and radius
+    private static final int[][] HOLES = {
+        {40, 40}, {710, 40}, {40, 710}, {710, 710}
+    };
+    private static final int HOLE_RADIUS = 20; // Radius of the hole in pixels
 
     public DisplayCarrom(int p) {
         animationObjects = new ArrayList<CarromPieces>();
@@ -27,6 +36,10 @@ public class DisplayCarrom extends JPanel {
         myBuffer = myImage.getGraphics();
         myBuffer.setColor(Color.GRAY);
         myBuffer.fillRect(0, 0, 750, 750);
+
+        player1Score = 0;
+        player2Score = 0;
+        strikerShots = 0;
 
         striker = new Striker(365, 600);
         animationObjects.add(striker);
@@ -67,20 +80,35 @@ public class DisplayCarrom extends JPanel {
 
     public void animate() {
         myBuffer.drawImage(i.getImage(), 0, 0, 750, 750, null);
-        for (CarromPieces animationObject : animationObjects) {
+        for (int i = 0; i < animationObjects.size(); i++) {
+            CarromPieces animationObject = animationObjects.get(i);
             animationObject.step();
             for (CarromPieces checkCollision : animationObjects) {
                 if (animationObject != checkCollision) {
                     animationObject.collide(checkCollision);
                 }
             }
-            animationObject.drawMe(myBuffer);
+            if (isInHole(animationObject)) {
+                if (animationObject != striker) { // Check if the piece is not the striker
+                    updateScore(animationObject);
+                    animationObjects.remove(i);
+                    i--; // Adjust the index after removal
+                } else {
+                    resetStriker(); // Reset the striker if it falls in a hole
+                }
+            } else {
+                animationObject.drawMe(myBuffer);
+            }
         }
         repaint();
     }
 
     public void paintComponent(Graphics g) {
         g.drawImage(myImage, 0, 0, 750, 750, null);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("Player 1 Score: " + player1Score, 50, 20);
+        g.drawString("Player 2 Score: " + player2Score, 550, 20);
     }
 
     private class AnimationListener implements ActionListener {
@@ -126,5 +154,44 @@ public class DisplayCarrom extends JPanel {
         striker.setDx(dx);
         striker.setDy(dy);
         striker.activate();
+        strikerShots++; // Increment striker shots count
+    }
+
+    private boolean isInHole(CarromPieces piece) {
+        for (int[] hole : HOLES) {
+            double distance = Math.sqrt(Math.pow(piece.getX() - hole[0], 2) + Math.pow(piece.getY() - hole[1], 2));
+            if (distance <= HOLE_RADIUS) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateScore(CarromPieces piece) {
+        if (piece instanceof WhitePiece) {
+            player1Score++;
+        } else if (piece instanceof BlackPiece) {
+            player2Score++;
+        } else if (piece instanceof Red_Queen) {
+            if (strikerShots % 2 == 0) {
+                player1Score += 3;
+            } else {
+                player2Score += 3;
+            }
+        } else if (piece instanceof Striker) {
+            if (strikerShots % 2 == 0) {
+                player1Score -= 1;
+            } else {
+                player2Score -= 1;
+            }
+        }
+    }
+
+    private void resetStriker() {
+        // Reset the striker to its initial position
+        striker.setX(365);
+        striker.setY(600);
+        striker.setDx(0);
+        striker.setDy(0);
     }
 }
