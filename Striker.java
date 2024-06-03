@@ -1,15 +1,23 @@
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * This class represents a carrom piece called Striker.
+ */
 public class Striker implements CarromPieces {
-    private int x, y;
-    private double dx, dy;
-    private boolean going = true;
-    private static final int SIZE = 30;
-    private static final int BORDER_SIZE = 40;
-    private static final int BOARD_SIZE = 750;
-    private static final int PLAY_AREA_SIZE = BOARD_SIZE - 2 * BORDER_SIZE;
+    private int x, y; // Position of the striker
+    private double dx, dy; // Velocity of the striker
+    private boolean going = true; // Flag indicating if the striker is moving
+    private static final int SIZE = 30; // Size of the striker
+    private static final int BORDER_SIZE = 40; // Size of the border around the board
+    private static final int BOARD_SIZE = 750; // Size of the board
+    private static final int PLAY_AREA_SIZE = BOARD_SIZE - 2 * BORDER_SIZE; // Play area size
 
+    /**
+     * Constructs a Striker object with given initial position.
+     * @param x1 The initial x-coordinate of the striker.
+     * @param y1 The initial y-coordinate of the striker.
+     */
     public Striker(int x1, int y1) {
         x = x1;
         y = y1;
@@ -17,27 +25,50 @@ public class Striker implements CarromPieces {
         dy = -22; // Move the striker up initially
     }
 
+    /**
+     * Draws the striker on the graphics object.
+     * @param g The Graphics object to draw on.
+     */
     public void drawMe(Graphics g) {
         ImageIcon striker = new ImageIcon("striker.jpeg");
         g.drawImage(striker.getImage(), x, y, SIZE, SIZE, null);
     }
 
+    /**
+     * Gets the x-coordinate of the striker.
+     * @return The x-coordinate of the striker.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Gets the y-coordinate of the striker.
+     * @return The y-coordinate of the striker.
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Activates the striker to start moving.
+     */
     public void activate() {
         going = true;
     }
 
+    /**
+     * Checks if the striker is active.
+     * @return True if the striker is active, otherwise false.
+     */
     public boolean isActive() {
         return going;
     }
 
+    /**
+     * Handles collision between the striker and another carrom piece.
+     * @param obj The carrom piece to collide with.
+     */
     public void collide(CarromPieces obj) {
         double otx = obj.getX();
         double oty = obj.getY();
@@ -69,6 +100,9 @@ public class Striker implements CarromPieces {
         }
     }
 
+    /**
+     * Checks and handles border collision of the striker.
+     */
     private void checkBorderCollision() {
         if (x <= BORDER_SIZE || x >= PLAY_AREA_SIZE) {
             dx = -dx; // Reverse direction on x-axis
@@ -82,6 +116,9 @@ public class Striker implements CarromPieces {
         }
     }
 
+    /**
+     * Moves the striker according to its velocity and handles friction.
+     */
     public void step() {
         if (going) {
             x += dx;
@@ -96,30 +133,58 @@ public class Striker implements CarromPieces {
         }
     }
 
+    /**
+     * Gets the horizontal velocity of the striker.
+     * @return The horizontal velocity of the striker.
+     */
     public double getDx() {
         return dx;
     }
 
+    /**
+     * Gets the vertical velocity of the striker.
+     * @return The vertical velocity of the striker.
+     */
     public double getDy() {
         return dy;
     }
 
+    /**
+     * Sets the horizontal velocity of the striker.
+     * @param dx The new horizontal velocity of the striker.
+     */
     public void setDx(double dx) {
         this.dx = dx;
     }
 
+    /**
+     * Sets the vertical velocity of the striker.
+     * @param dy The new vertical velocity of the striker.
+     */
     public void setDy(double dy) {
         this.dy = dy;
     }
 
+    /**
+     * Gets the size of the striker.
+     * @return The size of the striker.
+     */
     public int getSize() {
         return SIZE;
     }
 
+    /**
+     * Sets the x-coordinate of the striker.
+     * @param x The new x-coordinate of the striker.
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Sets the y-coordinate of the striker.
+     * @param y The new y-coordinate of the striker.
+     */
     public void setY(int y) {
         this.y = y;
     }

@@ -6,19 +6,25 @@ import javax.sound.sampled.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This class represents the starting panel of the Carrom game.
+ */
 public class StartingPanel extends JPanel {
-    // fields
-    private ImageIcon i = new ImageIcon("blurred_carrom.jpg");
-    public static final int FRAME = 750;
-    private Clip clip; // Define the clip variable
-    private boolean isPlaying;
-    JFrame cur;
+    private ImageIcon i = new ImageIcon("blurred_carrom.jpg"); // Background image
+    public static final int FRAME = 750; // Size of the frame
+    private Clip clip; // Audio clip
+    private boolean isPlaying; // Flag indicating if audio is playing
+    JFrame cur; // Reference to the main frame
 
-    // constructors
+    /**
+     * Constructs the starting panel.
+     * @param f The main JFrame.
+     */
     public StartingPanel(JFrame f) {
         cur = f;
         setLayout(new GridLayout(6, 1)); // Adjusted to 6 rows for better layout
 
+        // Title label
         JLabel title = new JLabel("Welcome to Carrom!");
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new Font(Font.SERIF, Font.BOLD, 50));
@@ -27,12 +33,14 @@ public class StartingPanel extends JPanel {
         title.setOpaque(true);
         add(title);
 
+        // Panel for selecting a song
         JPanel songPanel = new JPanel();
         songPanel.setLayout(new GridBagLayout());
         songPanel.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // Padding
 
+        // Label for selecting a song
         JLabel sub = new JLabel("Select a Song:");
         sub.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         sub.setForeground(Color.BLACK);
@@ -40,6 +48,7 @@ public class StartingPanel extends JPanel {
         gbc.gridy = 0;
         songPanel.add(sub, gbc);
 
+        // Combo box for selecting songs
         String[] songs = {"Heroism", "Warm Inspirational Piano", "Calm Piano"};
         JComboBox<String> songsComboBox = new JComboBox<>(songs);
         songsComboBox.setPreferredSize(new Dimension(150, 25)); // Set preferred size
@@ -47,6 +56,7 @@ public class StartingPanel extends JPanel {
         gbc.gridy = 0;
         songPanel.add(songsComboBox, gbc);
 
+        // Button for selecting a song
         JButton select = new JButton("Select");
         select.setPreferredSize(new Dimension(100, 40)); // Set preferred size
         select.setFont(new Font(Font.SERIF, Font.PLAIN, 20));
@@ -62,6 +72,7 @@ public class StartingPanel extends JPanel {
 
         add(songPanel);
 
+        // Instruction label
         JLabel inst = new JLabel("Select a Mode (Clicking will Start the Game)");
         inst.setHorizontalAlignment(SwingConstants.CENTER);
         inst.setFont(new Font(Font.SERIF, Font.BOLD, 27));
@@ -70,6 +81,7 @@ public class StartingPanel extends JPanel {
         inst.setOpaque(true);
         add(inst);
 
+        // Button for starting single-player game
         JButton singlePlayer = new JButton("Start Game");
         singlePlayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +97,7 @@ public class StartingPanel extends JPanel {
         singlePlayer.setFont(new Font(Font.SERIF, Font.BOLD, 27));
         add(singlePlayer);
 
+        // Button for viewing leaderboard
         JButton leaderboardButton = new JButton("Score");
         leaderboardButton.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         leaderboardButton.addActionListener(new ActionListener() {
@@ -99,6 +112,7 @@ public class StartingPanel extends JPanel {
         });
         add(leaderboardButton);
 
+        // Button for viewing scores
         JButton viewScoresButton = new JButton("View Scores");
         viewScoresButton.setFont(new Font(Font.SERIF, Font.BOLD, 20));
         viewScoresButton.addActionListener(new ActionListener() {
@@ -124,17 +138,21 @@ public class StartingPanel extends JPanel {
         add(viewScoresButton);
     }
 
+    /**
+     * Plays the selected audio file.
+     * @param filename The name of the selected audio file.
+     */
     public void playSound(String filename) {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filename.replace(" ", "_") + ".wav"));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();
-            isPlaying = true;
+            isPlaying = true; // Set flag to indicate audio is playing
             clip.addLineListener(event -> {
                 if (event.getType() == LineEvent.Type.STOP) {
                     clip.close();
-                    isPlaying = false;
+                    isPlaying = false; // Reset flag when audio stops
                     clip.stop();
                     stopSound();
                 }
@@ -144,16 +162,23 @@ public class StartingPanel extends JPanel {
         }
     }
 
+    /**
+     * Stops the currently playing audio.
+     */
     public void stopSound() {
         if (clip != null && isPlaying) {
-            clip.stop();
-            clip.close();
-            isPlaying = false;
+            clip.stop(); // Stop the audio
+            clip.close(); // Close the clip
+            isPlaying = false; // Reset flag
         }
     }
 
+    /**
+     * Overrides the paintComponent method to draw the background image.
+     * @param g The Graphics object to draw on.
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Ensure the parent class's paintComponent is called
-        g.drawImage(i.getImage(), 0, 0, FRAME, FRAME, null);
+        g.drawImage(i.getImage(), 0, 0, FRAME, FRAME, null); // Draw the background image
     }
 }
