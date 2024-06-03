@@ -25,9 +25,9 @@ public class DisplayCarrom extends JPanel {
     
     // Define the hole positions and radius
     private static final int[][] HOLES = {
-        {40, 40}, {710, 40}, {40, 710}, {710, 710}
+        {40, 40}, {690, 40}, {40, 690}, {690, 690}
     };
-    private static final int HOLE_RADIUS = 20; // Radius of the hole in pixels
+    private static final int HOLE_RADIUS = 40; // Radius of the hole in pixels
 
     public DisplayCarrom(int p) {
         animationObjects = new ArrayList<CarromPieces>();
