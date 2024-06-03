@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
+// this is an interface
 public interface CarromPieces {
     void drawMe(Graphics g);
     int getX();
