@@ -15,6 +15,7 @@ public class Powder extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
+        System.out.println("W key pressed: Striker speed increased");
             for (CarromPieces piece : pieces) {
                 if (piece instanceof Striker) {
                     Striker striker = (Striker) piece;

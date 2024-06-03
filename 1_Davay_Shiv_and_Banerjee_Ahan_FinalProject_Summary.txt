@@ -1,0 +1,11 @@
+Ahan and Shiv developed a game known as Freestyle Carrom. In
+this game, there are numerous features such as in-game music, 
+leaderboard, and file I/O for saving the scores for each person
+after the game ends. Within the game, the players can launch the 
+striker to hit the discs to try to get them in the pockets to get
+points. We learned about incorporating various techniques with audio, 
+file I/O, and panel swapping. With the various features that we added, 
+we were able to achieve all of the requirements up to the accelerated 
+mark; therefore, we believe that we should receive 100/100 points on 
+this project because of the complexity, intricate planning, and user 
+interactivity of the game.
