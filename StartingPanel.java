@@ -81,7 +81,7 @@ public class StartingPanel extends JPanel {
         inst.setOpaque(true);
         add(inst);
 
-        // Button for starting single-player game
+        // Button for starting the game
         JButton singlePlayer = new JButton("Start Game");
         singlePlayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
