@@ -1,0 +1,42 @@
+Free Style Carrom Instructions:
+
+After first running the program the starting panel will
+present you with multiple options. First is to start
+a new carrom game. Another is a drop down box which allows
+you to choose what song you want to play. Once you have
+selected a song from the drop down box hit the select
+button to play the song. The score button allows
+you to input your name, the score you got, into a
+file of your choice. The View Score button allows you
+to type in the filename which has your scores and view 
+your past scores. 
+
+Once you hit the start game button the game will commence.
+This game can be played by yourself, however it is designed
+to be a two player game. One player aims to hit all the black
+and red pieces on the board into the holes, and the other player
+goal is to get the white and red pieces into the hole. 
+
+The game starts with the striker immediatly hitting the center.
+Player two then chooses a spot on the carrom board to place
+the striker. The striker will not be placed if the spot choosen is
+not a valid spot. Valid ranges include the red circle, and the
+rectangular space that connect the two red circles. The game
+progresses like a normal game of carrom however the striker only 
+goes toward the middle to increase the difficulty. 
+
+As the game progresses players may want to increase the speed of the
+striker in order to move pieces further. This can be done by pressing W
+which will add powder. Powder increases the speed of the striker
+allowing it to go faster. Players are able to hit other oppenents
+pieces into the holes on their turn, however this will still count
+toward the oppenents score. If the striker goes into one of the holes
+that person turn automatically ends and the striker is placed back on
+the board. The next player can then choose where they want to place the
+striker to resume the game.
+
+The game ends once there are no more pieces
+left on the board to hit into the holes on each corner of the board.
+Once a game ends, it does not automatically save your score. 
+You will need to manually input your score using the Score
+button in the starting panel. 
